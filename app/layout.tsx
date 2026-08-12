@@ -16,11 +16,34 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: {
     default: "omnisiv — All agents. One search.",
-    template: "%s | omnisiv",
+    template: "%s · omnisiv",
   },
   description:
-    "The search engine for AI agents. Find any agent, tool, or MCP server in the Agent Web.",
-  keywords: ["AI agents", "MCP", "agent search", "agent directory", "Omnisiv"],
+    "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
+  metadataBase: new URL("https://omnisiv.com"),
+  openGraph: {
+    title: "omnisiv — All agents. One search.",
+    description:
+      "The search engine for AI agents. Find any agent, tool, or MCP server.",
+    url: "https://omnisiv.com",
+    siteName: "omnisiv",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "omnisiv — All agents. One search.",
+      },
+    ],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "omnisiv — All agents. One search.",
+    description:
+      "The search engine for AI agents. Find any agent, tool, or MCP server.",
+    images: ["/og.png"],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
