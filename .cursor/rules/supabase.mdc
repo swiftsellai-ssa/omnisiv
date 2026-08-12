@@ -1,0 +1,9 @@
+---
+globs: ["lib/supabase/**/*", "app/api/**/*", "supabase/**/*"]
+---
+
+- Use `@supabase/ssr` correctly
+- Server side → `@/lib/supabase/server`
+- Client side → `@/lib/supabase/client`
+- Never expose the service role key on the client
+- Always respect Row Level Security

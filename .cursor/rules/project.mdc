@@ -1,0 +1,39 @@
+---
+alwaysApply: true
+---
+
+# Omnisiv – Project Rules
+
+You are working on **Omnisiv**, the search engine for AI agents.
+Tagline: "All agents. One search."
+
+## Stack
+- Next.js 15+ (App Router)
+- TypeScript (strict mode)
+- Tailwind CSS + shadcn/ui
+- Supabase (PostgreSQL + pgvector)
+- Zod
+
+## Core Principles
+- Extremely simple and search-first (Google-like experience)
+- Clean, readable, production-ready code
+- Do not over-engineer
+- Prefer Server Components
+- Use proper TypeScript types from `@/types`
+- Never invent database columns
+
+## Agent Ready Score (important)
+Priority order:
+1. has_mcp → 40 points
+2. has_api → 18 points
+3. is_structured → 12 points
+4. is_open_source → 8 points
+5. is_self_hostable → 8 points
+6. payment_ready → 7 points
+7. docs_url exists → 5 points
+8. rating ≥ 4.2 → 2 points
+
+## Naming Conventions
+- Components: PascalCase
+- Database: snake_case
+- Prefer named exports
