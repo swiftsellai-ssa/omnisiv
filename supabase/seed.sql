@@ -478,6 +478,174 @@ insert into agents (
   'open_source', 'MIT License',
   true, true, true, true, true, false,
   4.4, 720, 54000, 'published', 'seed', now()
+),
+(
+  'Filesystem MCP',
+  'filesystem-mcp',
+  'Official MCP server for secure local filesystem read and write access.',
+  'Filesystem MCP is an official Anthropic reference server that gives AI agents structured access to local directories: read files, list paths, search, and write with configurable permissions.',
+  'https://github.com/modelcontextprotocol/servers',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/filesystem',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.6, 890, 74000, 'published', 'seed', now()
+),
+(
+  'Memory MCP',
+  'memory-mcp',
+  'Official MCP server for persistent agent memory via a knowledge graph.',
+  'Memory MCP is an official Anthropic reference server that stores and retrieves entities, relations, and observations across sessions — giving agents durable long-term memory.',
+  'https://github.com/modelcontextprotocol/servers',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/memory',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/memory',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.5, 620, 52000, 'published', 'seed', now()
+),
+(
+  'PostgreSQL MCP',
+  'postgres-mcp',
+  'Official MCP server for read-only SQL queries against a Postgres database.',
+  'PostgreSQL MCP is an official Anthropic reference server that lets AI agents run read-only SQL, inspect schemas, and describe tables in any accessible Postgres database.',
+  'https://github.com/modelcontextprotocol/servers',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/postgres',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/postgres',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.5, 680, 55000, 'published', 'seed', now()
+),
+(
+  'Slack MCP',
+  'slack-mcp',
+  'Official MCP server for reading Slack channels and posting messages.',
+  'Slack MCP is an official Anthropic reference server that gives AI agents access to Slack workspaces: list channels, read history, and post messages via the Slack API.',
+  'https://slack.com',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/slack',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/slack',
+  'freemium', 'Free Slack plan supported',
+  true, true, true, true, true, false,
+  4.3, 420, 36000, 'published', 'seed', now()
+),
+(
+  'Google Drive MCP',
+  'gdrive-mcp',
+  'Official MCP server for searching and reading Google Drive files.',
+  'Google Drive MCP is an official Anthropic reference server that lets AI agents search Drive, list files, and read document contents including Google Docs and Sheets.',
+  'https://workspace.google.com',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/gdrive',
+  'freemium', 'Requires Google Workspace or personal account',
+  true, true, true, true, true, false,
+  4.3, 380, 33000, 'published', 'seed', now()
+),
+(
+  'Puppeteer MCP',
+  'puppeteer-mcp',
+  'Official MCP server for browser automation via CDP screenshots.',
+  'Puppeteer MCP is an official Anthropic reference server for browser automation. Unlike Playwright MCP it uses screenshot-based vision rather than accessibility tree, suiting visual tasks.',
+  'https://github.com/modelcontextprotocol/servers',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/puppeteer',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.3, 340, 29000, 'published', 'seed', now()
+),
+(
+  'Fetch MCP',
+  'fetch-mcp',
+  'Official MCP server for fetching URLs and converting pages to Markdown.',
+  'Fetch MCP is an official Anthropic reference server that converts any URL to clean, LLM-friendly Markdown or raw text, with support for extracting specific content via CSS selectors.',
+  'https://github.com/modelcontextprotocol/servers',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/fetch',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/fetch',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.5, 710, 60000, 'published', 'seed', now()
+),
+(
+  'Linear MCP',
+  'linear-mcp',
+  'Official Linear MCP server for issues, projects, and team workflows.',
+  'Linear MCP gives AI agents access to your Linear workspace: create and update issues, search projects, read cycle state, and manage team workflows through Linear''s native MCP server.',
+  'https://linear.app',
+  null,
+  null,
+  'https://linear.app/docs/mcp',
+  'https://linear.app/docs/mcp',
+  'freemium', 'Requires Linear account; free plan available',
+  false, false, true, true, true, false,
+  4.5, 390, 35000, 'published', 'seed', now()
+),
+(
+  'JetBrains MCP',
+  'jetbrains-mcp',
+  'Official MCP proxy for IntelliJ-based IDEs — expose IDE actions to agents.',
+  'JetBrains MCP Proxy runs alongside any IntelliJ IDE and exposes editor actions, project structure, open files, and refactoring tools to external AI agents via the MCP protocol.',
+  'https://www.jetbrains.com',
+  'https://github.com/JetBrains/mcp-jetbrains',
+  null,
+  'https://github.com/JetBrains/mcp-jetbrains',
+  'https://github.com/JetBrains/mcp-jetbrains',
+  'open_source', 'Apache 2.0',
+  true, true, false, true, true, false,
+  4.3, 310, 27000, 'published', 'seed', now()
+),
+(
+  'Continue',
+  'continue',
+  'Open-source AI coding assistant for VS Code and JetBrains with MCP client.',
+  'Continue is an open-source AI pair programmer that works inside VS Code and JetBrains IDEs. Supports custom models, context providers, slash commands, and MCP servers for tool use.',
+  'https://continue.dev',
+  'https://github.com/continuedev/continue',
+  null,
+  'https://docs.continue.dev',
+  'https://docs.continue.dev/customize/context-providers/mcp',
+  'open_source', 'Apache 2.0',
+  true, true, false, true, true, false,
+  4.6, 1080, 88000, 'published', 'seed', now()
+),
+(
+  'Haystack',
+  'haystack',
+  'Open-source Python framework for RAG pipelines, agents, and MCP tools.',
+  'Haystack by deepset is a production-ready framework for building LLM apps with retrieval-augmented generation, agent pipelines, tool calling, and MCP server integrations.',
+  'https://haystack.deepset.ai',
+  'https://github.com/deepset-ai/haystack',
+  null,
+  'https://docs.haystack.deepset.ai',
+  'https://docs.haystack.deepset.ai/docs/mcptool',
+  'open_source', 'Apache 2.0',
+  true, true, true, true, true, false,
+  4.4, 740, 62000, 'published', 'seed', now()
+),
+(
+  'Roo Code',
+  'roo-code',
+  'Autonomous VS Code coding agent with MCP support and multi-model switching.',
+  'Roo Code is an open-source agentic coding extension for VS Code. Edits files, runs terminal commands, connects to MCP servers, and supports fast model switching for different task types.',
+  'https://roocode.com',
+  'https://github.com/RooVetGit/Roo-Code',
+  null,
+  'https://docs.roocode.com',
+  'https://docs.roocode.com/features/mcp',
+  'open_source', 'Apache 2.0',
+  true, true, false, true, true, false,
+  4.5, 640, 53000, 'published', 'seed', now()
 )
 on conflict (slug) do nothing;
 
@@ -517,6 +685,18 @@ where (a.slug = 'cursor' and c.slug = 'coding')
    or (a.slug = 'sequential-thinking-mcp' and c.slug = 'research')
    or (a.slug = 'windsurf' and c.slug = 'coding')
    or (a.slug = 'semantic-kernel' and c.slug = 'multi-agent')
+   or (a.slug = 'filesystem-mcp' and c.slug = 'coding')
+   or (a.slug = 'memory-mcp' and c.slug = 'coding')
+   or (a.slug = 'postgres-mcp' and c.slug = 'data')
+   or (a.slug = 'slack-mcp' and c.slug = 'content')
+   or (a.slug = 'gdrive-mcp' and c.slug = 'data')
+   or (a.slug = 'puppeteer-mcp' and c.slug = 'coding')
+   or (a.slug = 'fetch-mcp' and c.slug = 'data')
+   or (a.slug = 'linear-mcp' and c.slug = 'coding')
+   or (a.slug = 'jetbrains-mcp' and c.slug = 'coding')
+   or (a.slug = 'continue' and c.slug = 'coding')
+   or (a.slug = 'haystack' and c.slug = 'data')
+   or (a.slug = 'roo-code' and c.slug = 'coding')
 on conflict do nothing;
 
 -- Link tags
