@@ -6,6 +6,14 @@ export function Header() {
       <Link href="/" className="flex items-center gap-2 group">
         <span className="text-xl font-semibold tracking-tight">omnisiv</span>
       </Link>
+      <nav className="flex items-center gap-4 text-sm text-muted-foreground">
+        <Link
+          href="/submit"
+          className="hover:text-foreground transition-colors"
+        >
+          Submit agent
+        </Link>
+      </nav>
     </header>
   );
 }
