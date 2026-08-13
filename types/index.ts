@@ -81,3 +81,27 @@ export interface SearchResult {
   total: number;
   query: string;
 }
+
+/** Stable public API shape returned by GET /api/search */
+export interface AgentPublic {
+  id: string;
+  name: string;
+  slug: string;
+  /** Absolute URL: https://omnisiv.com/agent/{slug} */
+  url: string;
+  short_description: string;
+  website_url: string | null;
+  github_url: string | null;
+  docs_url: string | null;
+  mcp_url: string | null;
+  pricing_type: PricingType;
+  is_open_source: boolean;
+  is_self_hostable: boolean;
+  has_api: boolean;
+  has_mcp: boolean;
+  agent_ready_score: number;
+  rating: number;
+  review_count: number;
+  categories: { name: string; slug: string }[];
+  tags: { name: string; slug: string }[];
+}

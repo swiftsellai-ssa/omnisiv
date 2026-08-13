@@ -367,6 +367,118 @@ insert into agents (
   true, true, true, true, true, false,
   4.6, 1420, 105000, 'published', 'seed', now()
 )
+,(
+  'Stripe Agent Toolkit',
+  'stripe-agent-toolkit',
+  'Official Stripe MCP server for payments, customers, and subscriptions.',
+  'Stripe Agent Toolkit gives AI agents secure access to the Stripe API via MCP. Supports creating payment links, managing customers, querying charges, and triggering refunds.',
+  'https://stripe.com',
+  'https://github.com/stripe/agent-toolkit',
+  null,
+  'https://docs.stripe.com/agents',
+  'https://github.com/stripe/agent-toolkit',
+  'freemium', 'Free to use; Stripe fees apply',
+  true, true, true, true, true, true,
+  4.4, 310, 28000, 'published', 'seed', now()
+),
+(
+  'Cloudflare MCP',
+  'cloudflare-mcp',
+  'Official MCP server for Cloudflare Workers, KV, D1, and AI Gateway.',
+  'Cloudflare MCP Server lets AI agents interact with your Cloudflare account: deploy Workers, read KV stores, query D1 databases, and manage AI Gateway configs.',
+  'https://cloudflare.com',
+  'https://github.com/cloudflare/mcp-server-cloudflare',
+  null,
+  'https://developers.cloudflare.com/mcp',
+  'https://github.com/cloudflare/mcp-server-cloudflare',
+  'freemium', 'Cloudflare free tier + Workers pricing',
+  true, false, true, true, true, false,
+  4.4, 280, 24000, 'published', 'seed', now()
+),
+(
+  'Brave Search MCP',
+  'brave-search-mcp',
+  'MCP server for privacy-first web and local search via Brave Search API.',
+  'Brave Search MCP is an official reference server from Anthropic that provides web search and local search results to AI agents using the Brave Search API.',
+  'https://brave.com/search/api/',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://api.search.brave.com/app/documentation/web-search/get-started',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/brave-search',
+  'freemium', '2,000 free queries/mo; paid plans from $3/1k queries',
+  true, true, true, true, true, false,
+  4.3, 240, 21000, 'published', 'seed', now()
+),
+(
+  'Sentry MCP',
+  'sentry-mcp',
+  'Official MCP server for querying Sentry errors, issues, and traces.',
+  'Sentry MCP lets AI agents inspect error events, search issues, read stack traces, and surface performance problems directly from your Sentry projects.',
+  'https://sentry.io',
+  'https://github.com/getsentry/sentry-mcp',
+  null,
+  'https://docs.sentry.io/product/sentry-mcp/',
+  'https://github.com/getsentry/sentry-mcp',
+  'freemium', 'Requires Sentry account; free developer plan available',
+  true, false, true, true, true, false,
+  4.4, 195, 18000, 'published', 'seed', now()
+),
+(
+  'Pydantic AI',
+  'pydantic-ai',
+  'Python agent framework with type-safe tool use and MCP client support.',
+  'Pydantic AI is a production-grade Python framework for building AI agents with structured outputs, dependency injection, type-safe tool schemas, and native MCP client integration.',
+  'https://ai.pydantic.dev',
+  'https://github.com/pydantic/pydantic-ai',
+  null,
+  'https://ai.pydantic.dev/docs/',
+  'https://ai.pydantic.dev/docs/mcp/',
+  'open_source', 'MIT License',
+  true, true, true, true, true, false,
+  4.5, 480, 38000, 'published', 'seed', now()
+),
+(
+  'Sequential Thinking MCP',
+  'sequential-thinking-mcp',
+  'MCP server for structured multi-step reasoning and problem decomposition.',
+  'Sequential Thinking MCP is an official reference server that provides agents with a structured tool for breaking complex problems into explicit reasoning steps before acting.',
+  'https://github.com/modelcontextprotocol/servers',
+  'https://github.com/modelcontextprotocol/servers',
+  null,
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking',
+  'https://github.com/modelcontextprotocol/servers/tree/main/src/sequentialthinking',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.3, 170, 16000, 'published', 'seed', now()
+),
+(
+  'Windsurf',
+  'windsurf',
+  'AI-native code editor by Codeium with agentic flows and MCP support.',
+  'Windsurf is an AI-first code editor from Codeium featuring Cascade, a deeply integrated agent that edits code, runs commands, and connects to MCP servers for extended tool access.',
+  'https://codeium.com/windsurf',
+  null,
+  null,
+  'https://docs.codeium.com/windsurf',
+  'https://docs.codeium.com/windsurf/mcp',
+  'freemium', 'Free tier + Pro from $15/mo',
+  false, false, false, true, true, false,
+  4.5, 890, 62000, 'published', 'seed', now()
+),
+(
+  'Semantic Kernel',
+  'semantic-kernel',
+  'Microsoft SDK for building AI agents with plugins, memory, and MCP.',
+  'Semantic Kernel is Microsoft open-source SDK for integrating LLMs into .NET, Python, and Java apps. Supports function calling, MCP servers, planners, and memory for production agents.',
+  'https://learn.microsoft.com/en-us/semantic-kernel/overview/',
+  'https://github.com/microsoft/semantic-kernel',
+  null,
+  'https://learn.microsoft.com/en-us/semantic-kernel/',
+  'https://devblogs.microsoft.com/semantic-kernel/model-context-protocol-and-semantic-kernel/',
+  'open_source', 'MIT License',
+  true, true, true, true, true, false,
+  4.4, 720, 54000, 'published', 'seed', now()
+)
 on conflict (slug) do nothing;
 
 -- Link categories
@@ -397,6 +509,14 @@ where (a.slug = 'cursor' and c.slug = 'coding')
    or (a.slug = 'autogen' and c.slug = 'multi-agent')
    or (a.slug = 'llamaindex' and c.slug = 'data')
    or (a.slug = 'dify' and c.slug = 'multi-agent')
+   or (a.slug = 'stripe-agent-toolkit' and c.slug = 'data')
+   or (a.slug = 'cloudflare-mcp' and c.slug = 'coding')
+   or (a.slug = 'brave-search-mcp' and c.slug = 'research')
+   or (a.slug = 'sentry-mcp' and c.slug = 'coding')
+   or (a.slug = 'pydantic-ai' and c.slug = 'coding')
+   or (a.slug = 'sequential-thinking-mcp' and c.slug = 'research')
+   or (a.slug = 'windsurf' and c.slug = 'coding')
+   or (a.slug = 'semantic-kernel' and c.slug = 'multi-agent')
 on conflict do nothing;
 
 -- Link tags
