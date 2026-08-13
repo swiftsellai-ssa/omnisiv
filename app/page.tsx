@@ -6,10 +6,10 @@ import { SearchBar } from "@/components/search/SearchBar";
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-full flex-col">
-      <Header minimal />
-      <main className="flex flex-1 flex-col items-center justify-center px-6 pb-24">
-        <div className="w-full max-w-2xl space-y-8 text-center">
+    <div className="flex min-h-dvh flex-col">
+      <Header />
+      <main className="flex flex-1 flex-col items-center justify-center px-6 py-12">
+        <div className="w-full max-w-2xl text-center">
           <div className="space-y-3">
             <h1 className="text-5xl font-semibold tracking-tight sm:text-6xl">
               omnisiv
@@ -17,14 +17,13 @@ export default function HomePage() {
             <p className="text-lg text-muted-foreground sm:text-xl">
               All agents. One search.
             </p>
-            <p className="text-sm text-muted-foreground/80">
-              The search engine for the Agent Web
-            </p>
           </div>
 
-          <SearchBar size="large" autoFocus className="mx-auto" />
+          <div className="mt-14 sm:mt-16">
+            <SearchBar size="large" autoFocus className="mx-auto" />
+          </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-2 text-sm text-muted-foreground">
             <span>Try:</span>
             {[
               "MCP web scraping",
@@ -41,6 +40,10 @@ export default function HomePage() {
               </Link>
             ))}
           </div>
+
+          <p className="mt-6 text-xs text-muted-foreground/70">
+            25+ agents indexed · MCP-first
+          </p>
         </div>
       </main>
       <Footer />

@@ -14,19 +14,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://omnisiv.com"),
   title: {
     default: "omnisiv — All agents. One search.",
     template: "%s · omnisiv",
   },
   description:
     "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
-  metadataBase: new URL("https://omnisiv.com"),
   openGraph: {
     title: "omnisiv — All agents. One search.",
     description:
-      "The search engine for AI agents. Find any agent, tool, or MCP server.",
+      "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
     url: "https://omnisiv.com",
     siteName: "omnisiv",
+    type: "website",
     images: [
       {
         url: "/og.png",
@@ -35,13 +36,12 @@ export const metadata: Metadata = {
         alt: "omnisiv — All agents. One search.",
       },
     ],
-    type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: "omnisiv — All agents. One search.",
     description:
-      "The search engine for AI agents. Find any agent, tool, or MCP server.",
+      "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
     images: ["/og.png"],
   },
 };
@@ -52,7 +52,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-dvh flex flex-col bg-background text-foreground">
         {children}
       </body>
     </html>

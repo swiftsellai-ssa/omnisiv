@@ -53,7 +53,7 @@ export default function SubmitPage() {
 
   if (submitted) {
     return (
-      <div className="flex min-h-full flex-col">
+      <div className="flex min-h-dvh flex-col">
         <Header />
         <main className="flex flex-1 flex-col items-center justify-center px-6 py-16">
           <div className="max-w-md text-center space-y-5">
@@ -103,7 +103,7 @@ export default function SubmitPage() {
   }
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-dvh flex-col">
       <Header />
       <main className="flex-1 px-6 py-12">
         <div className="mx-auto max-w-lg space-y-8">
@@ -161,7 +161,7 @@ export default function SubmitPage() {
             )}
 
             <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Submitting..." : "Submit agent"}
+              {loading ? "Sending..." : "Send for review"}
             </Button>
           </form>
         </div>

@@ -5,7 +5,7 @@ import { Header } from "@/components/layout/Header";
 
 export default function NotFound() {
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-dvh flex-col">
       <Header />
       <main className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
         <h1 className="text-4xl font-semibold">404</h1>

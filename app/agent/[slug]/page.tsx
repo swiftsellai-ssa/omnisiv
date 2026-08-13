@@ -61,7 +61,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
   ].filter((l) => l.href);
 
   return (
-    <div className="flex min-h-full flex-col">
+    <div className="flex min-h-dvh flex-col">
       <Header />
       <main className="flex-1 px-6 py-8">
         <div className="mx-auto max-w-3xl space-y-8">
