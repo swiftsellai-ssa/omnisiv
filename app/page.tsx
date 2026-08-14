@@ -17,6 +17,9 @@ export default function HomePage() {
             <p className="text-lg text-muted-foreground sm:text-xl">
               All agents. One search.
             </p>
+            <p className="text-sm text-muted-foreground/70">
+              Search AI agents, tools, and MCP servers.
+            </p>
           </div>
 
           <div className="mt-14 sm:mt-16">
@@ -42,7 +45,7 @@ export default function HomePage() {
           </div>
 
           <p className="mt-6 text-xs text-muted-foreground/70">
-            25+ agents indexed · MCP-first
+            45+ agents indexed · MCP-first
           </p>
         </div>
       </main>
