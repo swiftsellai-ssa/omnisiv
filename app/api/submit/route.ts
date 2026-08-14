@@ -60,7 +60,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         ok: true,
-        id: `demo-${Date.now()}`,
         status: "pending",
         message: SUCCESS_MESSAGE,
       },
@@ -71,7 +70,7 @@ export async function POST(request: NextRequest) {
   const { createClient } = await import("@/lib/supabase/server");
   const supabase = await createClient();
 
-  const { data: row, error } = await supabase
+  const { error } = await supabase
     .from("submissions")
     .insert({
       name,
@@ -79,19 +78,16 @@ export async function POST(request: NextRequest) {
       short_description,
       submitted_by: submitted_by ?? null,
       status: "pending",
-    })
-    .select("id")
-    .single();
+    });
 
   if (error) {
-    console.error("[Omnisiv] Submission DB error:", error.message);
+    console.error("[Omnisiv] Submission DB error:", error.code, error.message);
     return ok500("Failed to save submission. Please try again.");
   }
 
   return NextResponse.json(
     {
       ok: true,
-      id: row.id,
       status: "pending",
       message: SUCCESS_MESSAGE,
     },
