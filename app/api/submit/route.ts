@@ -21,7 +21,7 @@ const submitSchema = z.object({
     .or(z.literal("").transform(() => undefined)),
   submitted_by: z
     .string()
-    .email("submitted_by must be a valid email")
+    .max(120, "submitted_by must be 120 characters or fewer")
     .optional()
     .or(z.literal("").transform(() => undefined)),
 });
