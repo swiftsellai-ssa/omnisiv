@@ -13,36 +13,39 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://www.omnisiv.com";
+const OG_IMAGE = `${SITE_URL}/og.png`;
+const TITLE = "omnisiv — All agents. One search.";
+const DESCRIPTION =
+  "The search engine for AI agents. Find any agent, tool, or MCP server in one place.";
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://omnisiv.com"),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "omnisiv — All agents. One search.",
+    default: TITLE,
     template: "%s · omnisiv",
   },
-  description:
-    "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
+  description: DESCRIPTION,
   openGraph: {
-    title: "omnisiv — All agents. One search.",
-    description:
-      "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
-    url: "https://omnisiv.com",
+    title: TITLE,
+    description: DESCRIPTION,
+    url: SITE_URL,
     siteName: "omnisiv",
     type: "website",
     images: [
       {
-        url: "/og.png",
+        url: OG_IMAGE,
         width: 1200,
         height: 630,
-        alt: "omnisiv — All agents. One search.",
+        alt: TITLE,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "omnisiv — All agents. One search.",
-    description:
-      "The search engine for AI agents. Find any agent, tool, or MCP server in one place.",
-    images: ["/og.png"],
+    title: TITLE,
+    description: DESCRIPTION,
+    images: [OG_IMAGE],
   },
 };
 
