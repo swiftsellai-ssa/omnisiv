@@ -68,10 +68,13 @@ export interface Submission {
 export interface SearchFilters {
   q?: string;
   pricing?: PricingType | "all";
+  /** License: is_open_source = true */
   open_source?: boolean;
   has_mcp?: boolean;
   has_api?: boolean;
   self_hostable?: boolean;
+  /** Cost: pricing_type in ('free', 'open_source') */
+  free?: boolean;
   category?: string;
   sort?: "relevance" | "score" | "rating" | "newest";
 }

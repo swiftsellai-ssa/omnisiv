@@ -57,7 +57,7 @@ export default function SubmitPage() {
         <Header />
         <main className="flex flex-1 flex-col items-center justify-center px-6 py-16">
           <div className="max-w-md text-center space-y-5">
-            <CheckCircle2 className="mx-auto size-12 text-green-600" />
+            <CheckCircle2 className="mx-auto size-12 text-green-600 dark:text-green-400" />
             <div className="space-y-2">
               <h1 className="text-2xl font-semibold">You&apos;re all set</h1>
               <p className="text-muted-foreground">

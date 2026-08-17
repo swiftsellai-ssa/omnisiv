@@ -1,5 +1,6 @@
 import type { Agent, SearchFilters } from "@/types";
 import { calculateAgentReadyScore } from "@/lib/scoring";
+import { isFreePricing, FREE_PRICING_TYPES } from "@/lib/search-filters";
 import {
   agentMatchesSearch,
   parseSearchQuery,
@@ -371,6 +372,7 @@ function applyFilters(agents: Agent[], filters: SearchFilters): Agent[] {
       agent.pricing_type !== filters.pricing
     )
       return false;
+    if (filters.free && !isFreePricing(agent.pricing_type)) return false;
     if (filters.open_source && !agent.is_open_source) return false;
     if (filters.has_mcp && !agent.has_mcp) return false;
     if (filters.has_api && !agent.has_api) return false;
@@ -468,6 +470,7 @@ export async function searchAgents(filters: SearchFilters): Promise<Agent[]> {
   if (filters.pricing && filters.pricing !== "all") {
     query = query.eq("pricing_type", filters.pricing);
   }
+  if (filters.free) query = query.in("pricing_type", FREE_PRICING_TYPES);
   if (filters.open_source) query = query.eq("is_open_source", true);
   if (filters.has_mcp) query = query.eq("has_mcp", true);
   if (filters.has_api) query = query.eq("has_api", true);

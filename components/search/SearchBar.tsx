@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useState, FormEvent } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState, type Dispatch, type FormEvent, type SetStateAction } from "react";
 import { Search } from "lucide-react";
 
 import { Input } from "@/components/ui/input";
@@ -15,23 +15,73 @@ interface SearchBarProps {
   className?: string;
 }
 
-export function SearchBar({
-  defaultValue = "",
+export function SearchBar(props: SearchBarProps) {
+  const [query, setQuery] = useState(props.defaultValue ?? "");
+
+  return (
+    <Suspense
+      fallback={
+        <SearchBarForm
+          {...props}
+          query={query}
+          setQuery={setQuery}
+          preserveParams={false}
+        />
+      }
+    >
+      <SearchBarWithParams
+        {...props}
+        query={query}
+        setQuery={setQuery}
+      />
+    </Suspense>
+  );
+}
+
+function SearchBarWithParams(
+  props: SearchBarProps & {
+    query: string;
+    setQuery: Dispatch<SetStateAction<string>>;
+  }
+) {
+  const searchParams = useSearchParams();
+  return (
+    <SearchBarForm
+      {...props}
+      currentParams={searchParams}
+    />
+  );
+}
+
+function SearchBarForm({
   size = "default",
   autoFocus = false,
   className,
-}: SearchBarProps) {
+  query,
+  setQuery,
+  currentParams,
+  preserveParams = true,
+}: SearchBarProps & {
+  query: string;
+  setQuery: Dispatch<SetStateAction<string>>;
+  currentParams?: URLSearchParams;
+  preserveParams?: boolean;
+}) {
   const router = useRouter();
-  const [query, setQuery] = useState(defaultValue);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
+    const params = new URLSearchParams(
+      preserveParams && currentParams ? currentParams.toString() : ""
+    );
     const q = query.trim();
     if (q) {
-      router.push(`/search?q=${encodeURIComponent(q)}`);
+      params.set("q", q);
     } else {
-      router.push("/search");
+      params.delete("q");
     }
+    const qs = params.toString();
+    router.push(qs ? `/search?${qs}` : "/search");
   }
 
   return (
@@ -48,7 +98,7 @@ export function SearchBar({
           placeholder="Search for any AI agent, tool, or MCP server..."
           autoFocus={autoFocus}
           className={cn(
-            "pl-12 pr-28 shadow-sm hover:shadow-md focus-visible:shadow-md transition-shadow",
+            "pl-12 pr-28 shadow-sm hover:shadow-md focus-visible:shadow-md transition-shadow dark:shadow-none dark:hover:shadow-none",
             size === "large" ? "h-14 text-lg rounded-full" : "h-11 rounded-full"
           )}
         />

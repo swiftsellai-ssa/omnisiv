@@ -29,7 +29,7 @@ export function AgentCard({ agent }: AgentCardProps) {
   ].filter(Boolean) as { label: string; variant: "default" | "secondary" | "outline" | "ghost" }[];
 
   return (
-    <Card className="hover:shadow-md transition-shadow">
+    <Card className="hover:shadow-md transition-shadow dark:shadow-none dark:hover:shadow-none dark:hover:border-foreground/15">
       <CardHeader className="pb-2">
         <div className="flex items-start justify-between gap-4">
           <div className="min-w-0 flex-1">

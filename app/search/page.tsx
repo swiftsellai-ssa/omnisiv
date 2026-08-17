@@ -5,36 +5,16 @@ import { Header } from "@/components/layout/Header";
 import { SearchBar } from "@/components/search/SearchBar";
 import { SearchFiltersBar } from "@/components/search/SearchFilters";
 import { SearchResults } from "@/components/search/SearchResults";
+import { parseSearchFilters } from "@/lib/search-filters";
 import { getCategories, searchAgents } from "@/lib/search";
-import type { SearchFilters, PricingType } from "@/types";
 
 interface SearchPageProps {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }
 
-function parseFilters(
-  params: Record<string, string | string[] | undefined>
-): SearchFilters {
-  const get = (key: string) => {
-    const val = params[key];
-    return Array.isArray(val) ? val[0] : val;
-  };
-
-  return {
-    q: get("q"),
-    pricing: (get("pricing") as PricingType | "all") ?? "all",
-    open_source: get("open_source") === "true" || undefined,
-    has_mcp: get("has_mcp") === "true" || undefined,
-    has_api: get("has_api") === "true" || undefined,
-    self_hostable: get("self_hostable") === "true" || undefined,
-    category: get("category"),
-    sort: (get("sort") as SearchFilters["sort"]) ?? "relevance",
-  };
-}
-
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
-  const filters = parseFilters(params);
+  const filters = parseSearchFilters(params);
   const [agents, categories] = await Promise.all([
     searchAgents(filters),
     getCategories(),
