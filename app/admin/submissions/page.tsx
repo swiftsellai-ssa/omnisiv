@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { LogoutButton, SubmissionActions } from "@/components/admin/SubmissionActions";
+import { AdminNav } from "@/components/admin/AdminNav";
+import { SubmissionActions } from "@/components/admin/SubmissionActions";
 import { isAdminFromCookies } from "@/lib/admin";
 import { createServiceClient } from "@/lib/supabase/admin";
 import { logSupabaseError } from "@/lib/supabase/agents";
@@ -63,14 +64,12 @@ export default async function SubmissionsPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-start justify-between gap-4">
-        <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Submissions</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {submissions.length} pending
-          </p>
-        </div>
-        <LogoutButton />
+      <AdminNav current="submissions" />
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">Submissions</h1>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {submissions.length} pending
+        </p>
       </div>
 
       {submissions.length === 0 ? (

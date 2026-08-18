@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { searchAgents } from "@/lib/search";
+import { logSearch } from "@/lib/search-log";
 import type { Agent, AgentPublic, SearchFilters } from "@/types";
 
 const BASE_URL = "https://omnisiv.com";
@@ -77,6 +78,13 @@ export async function GET(request: NextRequest) {
   const agents = await searchAgents(filters);
   const cap = limit ?? DEFAULT_LIMIT;
   const results = agents.slice(0, cap).map(toPublic);
+
+  logSearch({
+    query: q,
+    filters,
+    result_count: agents.length,
+    source: "api",
+  });
 
   return NextResponse.json(
     {

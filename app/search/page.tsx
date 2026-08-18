@@ -6,6 +6,7 @@ import { SearchBar } from "@/components/search/SearchBar";
 import { SearchFiltersBar } from "@/components/search/SearchFilters";
 import { SearchResults } from "@/components/search/SearchResults";
 import { parseSearchFilters } from "@/lib/search-filters";
+import { logSearch } from "@/lib/search-log";
 import { getCategories, searchAgents } from "@/lib/search";
 
 interface SearchPageProps {
@@ -19,6 +20,13 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
     searchAgents(filters),
     getCategories(),
   ]);
+
+  logSearch({
+    query: filters.q,
+    filters,
+    result_count: agents.length,
+    source: "web",
+  });
 
   return (
     <div className="flex min-h-dvh flex-col">
