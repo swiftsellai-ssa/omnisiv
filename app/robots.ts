@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/admin",
     },
-    sitemap: "https://omnisiv.com/sitemap.xml",
+    sitemap: "https://www.omnisiv.com/sitemap.xml",
   };
 }
