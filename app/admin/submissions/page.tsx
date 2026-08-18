@@ -1,9 +1,14 @@
 import { redirect } from "next/navigation";
 
 import { AdminNav } from "@/components/admin/AdminNav";
+import { AdminDbError } from "@/components/admin/AdminDbError";
 import { SubmissionActions } from "@/components/admin/SubmissionActions";
 import { isAdminFromCookies } from "@/lib/admin";
-import { createServiceClient } from "@/lib/supabase/admin";
+import {
+  createServiceClient,
+  explainSupabaseAdminError,
+  getServiceClientSetupError,
+} from "@/lib/supabase/admin";
 import { logSupabaseError } from "@/lib/supabase/agents";
 import type { Submission } from "@/types";
 
@@ -23,17 +28,18 @@ export default async function SubmissionsPage() {
     redirect("/admin/login");
   }
 
-  const supabase = createServiceClient();
-  if (!supabase) {
+  const setupError = getServiceClientSetupError();
+  if (setupError) {
     return (
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Submissions</h1>
-        <p className="text-sm text-muted-foreground">
-          Database is not configured. Set SUPABASE_SERVICE_ROLE_KEY.
-        </p>
-      </div>
+      <AdminDbError
+        nav="submissions"
+        title="Submissions"
+        message={setupError}
+      />
     );
   }
+
+  const supabase = createServiceClient()!;
 
   const { data, error } = await supabase
     .from("submissions")
@@ -45,10 +51,11 @@ export default async function SubmissionsPage() {
   if (error) {
     logSupabaseError("admin.submissions.list", error);
     return (
-      <div className="space-y-2">
-        <h1 className="text-2xl font-semibold tracking-tight">Submissions</h1>
-        <p className="text-sm text-destructive">Failed to load submissions.</p>
-      </div>
+      <AdminDbError
+        nav="submissions"
+        title="Submissions"
+        message={explainSupabaseAdminError(error)}
+      />
     );
   }
 
