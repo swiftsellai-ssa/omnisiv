@@ -1,19 +1,45 @@
 {
   "name": "omnisiv-mcp",
-  "version": "1.0.0",
-  "private": true,
+  "version": "0.1.0",
+  "description": "MCP server for omnisiv — search and submit AI agents",
   "type": "module",
-  "description": "MCP server for Omnisiv — search and submit AI agents",
   "bin": {
     "omnisiv-mcp": "./dist/index.js"
   },
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "start": "node dist/index.js",
-    "dev": "tsx src/index.ts"
+    "prepack": "npm run build"
   },
   "engines": {
     "node": ">=18"
+  },
+  "keywords": [
+    "mcp",
+    "omnisiv",
+    "ai-agents",
+    "model-context-protocol"
+  ],
+  "license": "MIT",
+  "homepage": "https://www.omnisiv.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swiftsellai-ssa/omnisiv.git",
+    "directory": "mcp-server"
+  },
+  "bugs": {
+    "url": "https://github.com/swiftsellai-ssa/omnisiv/issues"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.30.0",
@@ -21,7 +47,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.0",
-    "tsx": "^4.20.0",
     "typescript": "^5.9.0"
   }
 }

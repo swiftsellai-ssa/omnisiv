@@ -1,14 +1,61 @@
-# Omnisiv MCP server
+# omnisiv-mcp
 
-Minimal [MCP](https://modelcontextprotocol.io) server for [omnisiv.com](https://www.omnisiv.com) — the search engine for AI agents.
+MCP server for [omnisiv.com](https://www.omnisiv.com) — search and submit AI agents.
 
-It talks to the public HTTP API only. No admin tools.
+Run it with `npx`. Cursor, Claude Desktop, and Windsurf spawn it over stdio. It calls the public Omnisiv API only (no admin tools).
+
+Default API base: `https://www.omnisiv.com`
+
+## Quick start
+
+```bash
+npx -y omnisiv-mcp
+```
+
+That process speaks MCP on stdin/stdout. You do not open a browser or port.
+
+## Cursor / Claude Desktop / Windsurf
+
+Add this to the client MCP config, then restart the client.
+
+- **Cursor:** `~/.cursor/mcp.json`
+- **Claude Desktop:** `claude_desktop_config.json`
+- **Windsurf:** `~/.codeium/windsurf/mcp_config.json`
+
+```json
+{
+  "mcpServers": {
+    "omnisiv": {
+      "command": "npx",
+      "args": ["-y", "omnisiv-mcp"]
+    }
+  }
+}
+```
+
+Optional local/staging API:
+
+```json
+{
+  "mcpServers": {
+    "omnisiv": {
+      "command": "npx",
+      "args": ["-y", "omnisiv-mcp"],
+      "env": {
+        "OMNISIV_API_BASE": "http://localhost:3000"
+      }
+    }
+  }
+}
+```
+
+Then ask: “Search Omnisiv for MCP scrapers.”
 
 ## Tools
 
 ### `search_agents`
 
-`GET https://www.omnisiv.com/api/search`
+`GET {API}/api/search`
 
 | Arg | Type | Notes |
 | --- | --- | --- |
@@ -23,7 +70,7 @@ Returns compact rows: `name`, `slug`, `url`, `short_description`, `has_mcp`, `ha
 
 ### `submit_agent`
 
-`POST https://www.omnisiv.com/api/submit`
+`POST {API}/api/submit`
 
 | Arg | Type | Notes |
 | --- | --- | --- |
@@ -32,11 +79,15 @@ Returns compact rows: `name`, `slug`, `url`, `short_description`, `has_mcp`, `ha
 | `website_url` | string | Optional URL |
 | `submitted_by` | string | Optional contact, max 120 chars |
 
-Returns the API JSON as-is (submissions are reviewed manually).
+Returns the API JSON as-is. Submissions are reviewed manually.
 
-## Install / run
+## Env
 
-Node 18+.
+| Variable | Default | Purpose |
+| --- | --- | --- |
+| `OMNISIV_API_BASE` | `https://www.omnisiv.com` | Override API host (no trailing slash) |
+
+## Develop from this repo
 
 ```bash
 cd mcp-server
@@ -44,42 +95,3 @@ npm install
 npm run build
 npm start
 ```
-
-`npm start` is stdio-only (no HTTP port). Cursor and Claude spawn it for you.
-
-Override the API host when testing locally:
-
-```bash
-OMNISIV_API_BASE=http://localhost:3000 npm start
-```
-
-## Cursor / Claude MCP config
-
-After `npm install` and `npm run build`, add this to Cursor (`~/.cursor/mcp.json`) or Claude Desktop (`claude_desktop_config.json`). Use your real absolute path.
-
-```json
-{
-  "mcpServers": {
-    "omnisiv": {
-      "command": "node",
-      "args": ["C:/au_projects/omnisiv/mcp-server/dist/index.js"]
-    }
-  }
-}
-```
-
-Same thing via npm:
-
-```json
-{
-  "mcpServers": {
-    "omnisiv": {
-      "command": "npm",
-      "args": ["start"],
-      "cwd": "C:/au_projects/omnisiv/mcp-server"
-    }
-  }
-}
-```
-
-Restart the client after saving. Then ask: “Search Omnisiv for MCP scrapers.”

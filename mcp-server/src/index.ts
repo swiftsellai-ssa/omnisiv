@@ -32,8 +32,8 @@ function fail(err: unknown) {
 }
 
 const server = new McpServer({
-  name: "omnisiv",
-  version: "1.0.0",
+  name: "omnisiv-mcp",
+  version: "0.1.0",
 });
 
 server.registerTool(

@@ -59,7 +59,7 @@ async function request(
       ...init,
       headers: {
         Accept: "application/json",
-        "User-Agent": "omnisiv-mcp/1.0",
+        "User-Agent": "omnisiv-mcp/0.1.0",
         ...init.headers,
       },
       signal: AbortSignal.timeout(TIMEOUT_MS),
