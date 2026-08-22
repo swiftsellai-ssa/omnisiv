@@ -17,6 +17,11 @@ function staticPages(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
+      url: `${BASE}/about`,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
       url: `${BASE}/submit`,
       changeFrequency: "monthly",
       priority: 0.5,

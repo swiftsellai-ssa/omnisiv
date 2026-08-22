@@ -11,6 +11,13 @@ export function Footer() {
       </p>
       <p className="mt-2 text-muted-foreground/70">
         <Link
+          href="/about"
+          className="hover:text-foreground transition-colors underline-offset-4 hover:underline"
+        >
+          About
+        </Link>
+        <span className="px-2 text-muted-foreground/40">·</span>
+        <Link
           href="/api-docs"
           className="hover:text-foreground transition-colors underline-offset-4 hover:underline"
         >
