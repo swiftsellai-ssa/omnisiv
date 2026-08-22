@@ -14,6 +14,7 @@ const searchSchema = z.object({
   has_mcp: z.coerce.boolean().optional(),
   has_api: z.coerce.boolean().optional(),
   open_source: z.coerce.boolean().optional(),
+  free: z.coerce.boolean().optional(),
   category: z.string().optional(),
   sort: z.enum(["relevance", "score", "rating", "newest"]).optional(),
   limit: z.coerce
@@ -63,7 +64,7 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const { q, has_mcp, has_api, open_source, category, sort, limit } =
+  const { q, has_mcp, has_api, open_source, free, category, sort, limit } =
     parsed.data;
 
   const filters: SearchFilters = {
@@ -71,6 +72,7 @@ export async function GET(request: NextRequest) {
     has_mcp: has_mcp || undefined,
     has_api: has_api || undefined,
     open_source: open_source || undefined,
+    free: free || undefined,
     category,
     sort: sort ?? "relevance",
   };

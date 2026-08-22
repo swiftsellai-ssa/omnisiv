@@ -4,7 +4,7 @@
   "description": "MCP server for omnisiv — search and submit AI agents",
   "type": "module",
   "bin": {
-    "omnisiv-mcp": "./dist/index.js"
+    "omnisiv-mcp": "dist/index.js"
   },
   "main": "./dist/index.js",
   "exports": {
