@@ -2,6 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 import { isSupabaseConfigured } from "@/lib/search";
+import {
+  createServiceClient,
+  getServiceClientSetupError,
+} from "@/lib/supabase/admin";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -67,8 +71,11 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const { createClient } = await import("@/lib/supabase/server");
-  const supabase = await createClient();
+  const supabase = createServiceClient();
+  if (!supabase) {
+    console.error("[Omnisiv] Submission setup:", getServiceClientSetupError());
+    return ok500("Failed to save submission. Please try again.");
+  }
 
   const { error } = await supabase
     .from("submissions")

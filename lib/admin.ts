@@ -6,7 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export const ADMIN_COOKIE = "omnisiv_admin";
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 7;
-const SITE_URL = "https://omnisiv.com";
+const SITE_URL = "https://www.omnisiv.com";
 
 export function getAdminSecret(): string | undefined {
   const secret = process.env.ADMIN_SECRET;
