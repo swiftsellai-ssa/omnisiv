@@ -483,7 +483,7 @@ export async function searchAgents(filters: SearchFilters): Promise<Agent[]> {
 
   if (error) {
     logSupabaseError("searchAgents", error);
-    return searchDemoAgents(filters);
+    return [];
   }
 
   if (!data) return [];
@@ -508,11 +508,11 @@ export async function getAgentBySlug(slug: string): Promise<Agent | null> {
     .select(agentSelectQuery(false))
     .eq("slug", slug)
     .eq("status", "published")
-    .single();
+    .maybeSingle();
 
   if (error) {
     logSupabaseError("getAgentBySlug", error);
-    return DEMO_AGENTS.find((a) => a.slug === slug) ?? null;
+    return null;
   }
 
   if (!data) return null;

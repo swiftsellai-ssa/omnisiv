@@ -28,7 +28,8 @@ export const AGENT_COLUMNS = `
   source,
   created_at,
   updated_at,
-  published_at
+  published_at,
+  last_verified_at
 `.trim();
 
 type AgentRow = {

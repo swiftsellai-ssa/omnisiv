@@ -4,6 +4,7 @@ import { AdminNav } from "@/components/admin/AdminNav";
 import { AdminDbError } from "@/components/admin/AdminDbError";
 import { SubmissionActions } from "@/components/admin/SubmissionActions";
 import { isAdminFromCookies } from "@/lib/admin";
+import { isHttpUrl } from "@/lib/utils";
 import {
   createServiceClient,
   explainSupabaseAdminError,
@@ -92,16 +93,21 @@ export default async function SubmissionsPage() {
             >
               <div className="min-w-0 space-y-1">
                 <p className="font-medium">{item.name}</p>
-                {item.website_url && (
-                  <a
-                    href={item.website_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block truncate text-sm text-primary hover:underline"
-                  >
-                    {item.website_url}
-                  </a>
-                )}
+                {item.website_url &&
+                  (isHttpUrl(item.website_url) ? (
+                    <a
+                      href={item.website_url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block truncate text-sm text-primary hover:underline"
+                    >
+                      {item.website_url}
+                    </a>
+                  ) : (
+                    <p className="truncate text-sm text-muted-foreground">
+                      {item.website_url}
+                    </p>
+                  ))}
                 {item.short_description && (
                   <p className="text-sm text-muted-foreground">
                     {item.short_description}

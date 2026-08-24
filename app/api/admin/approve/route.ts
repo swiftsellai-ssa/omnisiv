@@ -13,6 +13,7 @@ import {
 } from "@/lib/admin";
 import { createServiceClient } from "@/lib/supabase/admin";
 import { logSupabaseError } from "@/lib/supabase/agents";
+import { isHttpUrl } from "@/lib/utils";
 import type { Submission } from "@/types";
 
 const approveSchema = z.object({
@@ -66,9 +67,10 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: false, error: "Submission is not pending" }, { status: 409 });
   }
 
-  const openSource = suggestsOpenSource(row.name, row.short_description, row.website_url);
+  const websiteUrl = isHttpUrl(row.website_url) ? row.website_url : null;
+  const openSource = suggestsOpenSource(row.name, row.short_description, websiteUrl);
   const hasMcp = suggestsMcp(row.name, row.short_description);
-  const githubUrl = isGithubUrl(row.website_url) ? row.website_url : null;
+  const githubUrl = isGithubUrl(websiteUrl) ? websiteUrl : null;
 
   const baseSlug = slugify(row.name);
   const { data: collisions, error: slugError } = await supabase
@@ -90,11 +92,12 @@ export async function POST(request: NextRequest) {
     name: row.name,
     slug,
     short_description: row.short_description || row.name,
-    website_url: row.website_url ?? null,
+    website_url: websiteUrl,
     github_url: githubUrl,
     status: "published",
     source: "submission",
     published_at: now,
+    last_verified_at: now,
     is_open_source: openSource,
     has_mcp: hasMcp,
     pricing_type: openSource ? "open_source" : "free",

@@ -50,6 +50,7 @@ export interface Agent {
   created_at: string;
   updated_at: string;
   published_at?: string | null;
+  last_verified_at?: string | null;
   categories?: Category[];
   tags?: Tag[];
 }
@@ -90,7 +91,7 @@ export interface AgentPublic {
   id: string;
   name: string;
   slug: string;
-  /** Absolute URL: https://omnisiv.com/agent/{slug} */
+  /** Absolute URL: https://www.omnisiv.com/agent/{slug} */
   url: string;
   short_description: string;
   website_url: string | null;
@@ -105,6 +106,7 @@ export interface AgentPublic {
   agent_ready_score: number;
   rating: number;
   review_count: number;
+  last_verified_at: string | null;
   categories: { name: string; slug: string }[];
   tags: { name: string; slug: string }[];
 }

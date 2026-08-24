@@ -5,7 +5,7 @@ import { searchAgents } from "@/lib/search";
 import { logSearch } from "@/lib/search-log";
 import type { Agent, AgentPublic, SearchFilters } from "@/types";
 
-const BASE_URL = "https://omnisiv.com";
+const BASE_URL = "https://www.omnisiv.com";
 const DEFAULT_LIMIT = 20;
 const MAX_LIMIT = 50;
 
@@ -45,6 +45,7 @@ function toPublic(agent: Agent): AgentPublic {
     agent_ready_score: agent.agent_ready_score,
     rating: agent.rating,
     review_count: agent.review_count,
+    last_verified_at: agent.last_verified_at ?? null,
     categories: (agent.categories ?? []).map(({ name, slug }) => ({
       name,
       slug,

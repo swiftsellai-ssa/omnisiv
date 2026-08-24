@@ -78,6 +78,7 @@ const SEARCH_SAMPLE = `{
       "agent_ready_score": 100,
       "rating": 4.4,
       "review_count": 420,
+      "last_verified_at": "2026-08-24T00:00:00.000Z",
       "categories": [{ "name": "Data", "slug": "data" }],
       "tags": [
         { "name": "MCP", "slug": "mcp" },

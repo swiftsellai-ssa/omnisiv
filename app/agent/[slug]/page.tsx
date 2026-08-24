@@ -17,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getAgentBySlug, searchAgents } from "@/lib/search";
 import { getScoreLabel } from "@/lib/scoring";
+import { formatVerifiedDate, isHttpUrl } from "@/lib/utils";
 
 interface AgentPageProps {
   params: Promise<{ slug: string }>;
@@ -58,7 +59,7 @@ export default async function AgentPage({ params }: AgentPageProps) {
     { href: agent.demo_url, label: "Demo", icon: Play },
     { href: agent.docs_url, label: "Docs", icon: BookOpen },
     { href: agent.mcp_url, label: "MCP", icon: Plug },
-  ].filter((l) => l.href);
+  ].filter((l) => isHttpUrl(l.href));
 
   return (
     <div className="flex min-h-dvh flex-col">
@@ -74,6 +75,11 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 <p className="mt-2 text-lg text-muted-foreground">
                   {agent.short_description}
                 </p>
+                {agent.last_verified_at && (
+                  <p className="mt-2 text-sm text-muted-foreground">
+                    Verified · {formatVerifiedDate(agent.last_verified_at)}
+                  </p>
+                )}
               </div>
               <div className="flex shrink-0 flex-col items-end gap-1">
                 <div className="flex items-center gap-1 text-amber-600 dark:text-amber-400">

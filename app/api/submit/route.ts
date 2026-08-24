@@ -6,6 +6,7 @@ import {
   createServiceClient,
   getServiceClientSetupError,
 } from "@/lib/supabase/admin";
+import { isHttpUrl } from "@/lib/utils";
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin": "*",
@@ -21,6 +22,7 @@ const submitSchema = z.object({
   website_url: z
     .string()
     .url("website_url must be a valid URL")
+    .refine((url) => isHttpUrl(url), "website_url must be an http or https URL")
     .optional()
     .or(z.literal("").transform(() => undefined)),
   submitted_by: z
@@ -77,15 +79,13 @@ export async function POST(request: NextRequest) {
     return ok500("Failed to save submission. Please try again.");
   }
 
-  const { error } = await supabase
-    .from("submissions")
-    .insert({
-      name,
-      website_url: website_url ?? null,
-      short_description,
-      submitted_by: submitted_by ?? null,
-      status: "pending",
-    });
+  const { error } = await supabase.from("submissions").insert({
+    name,
+    website_url: website_url ?? null,
+    short_description,
+    submitted_by: submitted_by ?? null,
+    status: "pending",
+  });
 
   if (error) {
     console.error("[Omnisiv] Submission DB error:", error.code, error.message);

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getScoreLabel } from "@/lib/scoring";
+import { formatVerifiedDate, isHttpUrl } from "@/lib/utils";
 
 interface AgentCardProps {
   agent: Agent;
@@ -41,6 +42,11 @@ export function AgentCard({ agent }: AgentCardProps) {
             <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
               {agent.short_description}
             </p>
+            {agent.last_verified_at && (
+              <p className="mt-1 text-xs text-muted-foreground">
+                Verified · {formatVerifiedDate(agent.last_verified_at)}
+              </p>
+            )}
           </div>
           <div className="flex shrink-0 flex-col items-end gap-1 text-sm">
             <div className="flex items-center gap-1 text-amber-600 dark:text-amber-400">
@@ -73,7 +79,7 @@ export function AgentCard({ agent }: AgentCardProps) {
           ))}
         </div>
         <div className="flex items-center gap-3 text-sm">
-          {agent.website_url && (
+          {isHttpUrl(agent.website_url) && (
             <a
               href={agent.website_url}
               target="_blank"
