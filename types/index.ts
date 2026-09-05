@@ -7,6 +7,18 @@ export type PricingType =
 
 export type AgentStatus = "draft" | "published" | "archived" | "pending";
 
+export type AgentKind = "agent" | "mcp" | "skill";
+
+export const AGENT_KINDS: AgentKind[] = ["agent", "mcp", "skill"];
+
+export function listingKind(
+  kind: string | null | undefined,
+  has_mcp?: boolean
+): AgentKind {
+  if (kind === "mcp" || kind === "skill" || kind === "agent") return kind;
+  return has_mcp ? "mcp" : "agent";
+}
+
 export type SubmissionStatus = "pending" | "approved" | "rejected";
 
 export interface Category {
@@ -39,6 +51,7 @@ export interface Agent {
   is_self_hostable: boolean;
   has_api: boolean;
   has_mcp: boolean;
+  kind?: AgentKind;
   is_structured: boolean;
   payment_ready: boolean;
   rating: number;
@@ -72,6 +85,8 @@ export interface SearchFilters {
   /** License: is_open_source = true */
   open_source?: boolean;
   has_mcp?: boolean;
+  /** Listing kind. `mcp` currently also matches has_mcp listings. */
+  kind?: AgentKind;
   has_api?: boolean;
   self_hostable?: boolean;
   /** Cost: pricing_type in ('free', 'open_source') */
@@ -103,6 +118,7 @@ export interface AgentPublic {
   is_self_hostable: boolean;
   has_api: boolean;
   has_mcp: boolean;
+  kind: AgentKind;
   agent_ready_score: number;
   rating: number;
   review_count: number;

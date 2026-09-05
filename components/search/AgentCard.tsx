@@ -21,7 +21,11 @@ const PRICING_LABELS: Record<string, string> = {
 
 export function AgentCard({ agent }: AgentCardProps) {
   const badges = [
-    agent.has_mcp && { label: "MCP", variant: "default" as const },
+    agent.kind === "skill" && { label: "Skill", variant: "default" as const },
+    (agent.kind === "mcp" || agent.has_mcp) && {
+      label: "MCP",
+      variant: "default" as const,
+    },
     agent.has_api && { label: "API", variant: "secondary" as const },
     agent.is_open_source && { label: "Open Source", variant: "outline" as const },
     agent.is_self_hostable && { label: "Self-hostable", variant: "outline" as const },

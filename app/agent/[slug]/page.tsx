@@ -99,7 +99,8 @@ export default async function AgentPage({ params }: AgentPageProps) {
                 {PRICING_LABELS[agent.pricing_type]}
                 {agent.pricing_details && ` · ${agent.pricing_details}`}
               </Badge>
-              {agent.has_mcp && <Badge>MCP</Badge>}
+              {agent.kind === "skill" && <Badge>Skill</Badge>}
+              {(agent.kind === "mcp" || agent.has_mcp) && <Badge>MCP</Badge>}
               {agent.has_api && <Badge variant="secondary">API</Badge>}
               {agent.is_open_source && <Badge variant="outline">Open Source</Badge>}
               {agent.is_self_hostable && (

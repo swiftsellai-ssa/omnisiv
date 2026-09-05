@@ -1,4 +1,4 @@
-import type { Agent } from "@/types";
+import { listingKind, type Agent } from "@/types";
 
 /** Columns safe for PostgREST (excludes vector/tsvector types). */
 export const AGENT_COLUMNS = `
@@ -18,6 +18,7 @@ export const AGENT_COLUMNS = `
   is_self_hostable,
   has_api,
   has_mcp,
+  kind,
   is_structured,
   payment_ready,
   rating,
@@ -40,6 +41,7 @@ type AgentRow = {
 export function mapAgentRow(row: AgentRow): Agent {
   return {
     ...row,
+    kind: listingKind(row.kind, row.has_mcp),
     rating: Number(row.rating),
     agent_ready_score: Number(row.agent_ready_score),
     categories:

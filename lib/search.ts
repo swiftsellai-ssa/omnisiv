@@ -1,4 +1,4 @@
-import type { Agent, SearchFilters } from "@/types";
+import { listingKind, type Agent, type SearchFilters } from "@/types";
 import { calculateAgentReadyScore } from "@/lib/scoring";
 import { isFreePricing, FREE_PRICING_TYPES } from "@/lib/search-filters";
 import {
@@ -375,6 +375,11 @@ function applyFilters(agents: Agent[], filters: SearchFilters): Agent[] {
     if (filters.free && !isFreePricing(agent.pricing_type)) return false;
     if (filters.open_source && !agent.is_open_source) return false;
     if (filters.has_mcp && !agent.has_mcp) return false;
+    if (
+      filters.kind &&
+      listingKind(agent.kind, agent.has_mcp) !== filters.kind
+    )
+      return false;
     if (filters.has_api && !agent.has_api) return false;
     if (filters.self_hostable && !agent.is_self_hostable) return false;
     if (
@@ -473,6 +478,9 @@ export async function searchAgents(filters: SearchFilters): Promise<Agent[]> {
   if (filters.free) query = query.in("pricing_type", FREE_PRICING_TYPES);
   if (filters.open_source) query = query.eq("is_open_source", true);
   if (filters.has_mcp) query = query.eq("has_mcp", true);
+  if (filters.kind && filters.kind !== "mcp") {
+    query = query.eq("kind", filters.kind);
+  }
   if (filters.has_api) query = query.eq("has_api", true);
   if (filters.self_hostable) query = query.eq("is_self_hostable", true);
   if (filters.category) {

@@ -18,7 +18,6 @@ interface SearchFiltersBarProps {
 }
 
 const TOGGLE_CHIPS: { key: BoolFilterKey; label: string; title: string }[] = [
-  { key: "has_mcp", label: "MCP", title: "Has an MCP server" },
   { key: "has_api", label: "API", title: "Has a public API" },
   { key: "free", label: "Free", title: "Free to use (pricing is free or open source)" },
   { key: "open_source", label: "Open Source", title: "Open source license" },
@@ -72,16 +71,35 @@ export function SearchFiltersBar({ filters, categories }: SearchFiltersBarProps)
     for (const key of BOOL_FILTER_KEYS) {
       params.delete(key);
     }
+    params.delete("kind");
     params.delete("category");
     params.delete("pricing");
+    commit(params);
+  }, [commit, searchParams]);
+
+  const toggleKindMcp = useCallback(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    const on =
+      params.get("kind") === "mcp" || isTruthyParam(params.get("has_mcp"));
+    if (on) {
+      params.delete("kind");
+      params.delete("has_mcp");
+    } else {
+      params.set("kind", "mcp");
+      params.delete("has_mcp");
+    }
     commit(params);
   }, [commit, searchParams]);
 
   const sort = searchParams.get("sort") ?? filters.sort ?? "relevance";
   const category = searchParams.get("category") || undefined;
   const pricing = searchParams.get("pricing");
+  const mcpOn =
+    searchParams.get("kind") === "mcp" ||
+    isTruthyParam(searchParams.get("has_mcp"));
   const filtersOn =
     BOOL_FILTER_KEYS.some((key) => isTruthyParam(searchParams.get(key))) ||
+    Boolean(searchParams.get("kind")) ||
     Boolean(category) ||
     Boolean(pricing && pricing !== "all");
 
@@ -133,6 +151,12 @@ export function SearchFiltersBar({ filters, categories }: SearchFiltersBarProps)
           )}
         </div>
         <div className="flex flex-wrap gap-1.5">
+          <FilterChip
+            label="MCP"
+            title="MCP listings"
+            active={mcpOn}
+            onClick={toggleKindMcp}
+          />
           {TOGGLE_CHIPS.map(({ key, label, title }) => (
             <FilterChip
               key={key}

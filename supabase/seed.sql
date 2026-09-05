@@ -7,7 +7,9 @@ insert into categories (name, slug, description) values
   ('Sales', 'sales', 'Agents for outreach, CRM, and follow-ups'),
   ('Content', 'content', 'Agents for writing, editing, and content creation'),
   ('Data', 'data', 'Agents for data extraction, scraping, and pipelines'),
-  ('Multi-Agent', 'multi-agent', 'Orchestrated multi-agent systems')
+  ('Multi-Agent', 'multi-agent', 'Orchestrated multi-agent systems'),
+  ('Observability', 'observability', 'Agents for logs, tracing, monitoring, and incident response'),
+  ('Payments', 'payments', 'Agents for billing, checkout, and payment operations')
 on conflict (slug) do nothing;
 
 insert into agents (
@@ -649,6 +651,166 @@ insert into agents (
 )
 on conflict (slug) do nothing;
 
+insert into agents (
+  name, slug, short_description, description,
+  website_url, github_url, demo_url, docs_url, mcp_url,
+  pricing_type, pricing_details,
+  is_open_source, is_self_hostable, has_api, has_mcp, is_structured, payment_ready,
+  rating, review_count, view_count, status, source, published_at,
+  kind, last_verified_at
+) values
+(
+  'Grafana MCP',
+  'grafana-mcp',
+  'Official MCP server for Grafana dashboards, datasources, alerting, and incidents.',
+  'Grafana MCP gives AI agents structured access to dashboards, Prometheus and Loki queries, alerting, OnCall, and incidents on Grafana Cloud or self-managed Grafana.',
+  'https://grafana.com',
+  'https://github.com/grafana/mcp-grafana',
+  null,
+  'https://grafana.com/docs/grafana/latest/developer-resources/mcp/',
+  'https://github.com/grafana/mcp-grafana',
+  'open_source', 'Apache 2.0',
+  true, true, true, true, true, false,
+  4.5, 410, 28000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'Chrome DevTools MCP',
+  'chrome-devtools-mcp',
+  'Official Chrome DevTools MCP for browser automation, debugging, and performance traces.',
+  'Chrome DevTools MCP lets coding agents control a live Chrome browser, inspect the console and network, take screenshots, and record performance traces via DevTools.',
+  'https://developer.chrome.com/blog/chrome-devtools-mcp',
+  'https://github.com/ChromeDevTools/chrome-devtools-mcp',
+  null,
+  'https://github.com/ChromeDevTools/chrome-devtools-mcp',
+  'https://github.com/ChromeDevTools/chrome-devtools-mcp',
+  'open_source', 'Apache 2.0',
+  true, true, false, true, true, false,
+  4.6, 890, 51000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'MongoDB MCP',
+  'mongodb-mcp',
+  'Official MCP server for querying MongoDB data and managing Atlas deployments.',
+  'MongoDB MCP Server lets AI clients inspect schemas, run queries, manage indexes, and administer Atlas clusters from natural language.',
+  'https://www.mongodb.com',
+  'https://github.com/mongodb-js/mongodb-mcp-server',
+  null,
+  'https://www.mongodb.com/docs/mcp-server/',
+  'https://github.com/mongodb-js/mongodb-mcp-server',
+  'open_source', 'Apache 2.0',
+  true, true, true, true, true, false,
+  4.5, 520, 34000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'Neon MCP',
+  'neon-mcp',
+  'Official Neon MCP for Postgres projects, branches, SQL, and schema migrations.',
+  'Neon MCP lets agents create projects, manage branches, run SQL, and apply schema migrations on serverless Postgres via the Neon API or a hosted MCP endpoint.',
+  'https://neon.tech',
+  'https://github.com/neondatabase/mcp-server-neon',
+  null,
+  'https://neon.com/docs/ai/neon-mcp-server',
+  'https://mcp.neon.tech',
+  'open_source', 'Apache 2.0',
+  true, true, true, true, true, false,
+  4.5, 380, 26000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'Apify MCP',
+  'apify-mcp',
+  'Official Apify MCP for running Store Actors, crawlers, and web data extraction.',
+  'Apify MCP connects agents to thousands of scrapers and automation Actors on Apify Store, plus platform docs and run results, via hosted MCP or a local stdio server.',
+  'https://apify.com',
+  'https://github.com/apify/apify-mcp-server',
+  null,
+  'https://docs.apify.com/platform/integrations/mcp',
+  'https://mcp.apify.com',
+  'freemium', 'Hosted MCP plus Apify Store Actors',
+  true, true, true, true, true, true,
+  4.4, 460, 31000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'Blender MCP',
+  'blender-mcp',
+  'Community MCP server that lets agents control Blender for 3D scenes and modeling.',
+  'Blender MCP (ahujasid) connects an LLM to a Blender addon so agents can create, inspect, and edit 3D scenes through the Model Context Protocol.',
+  'https://github.com/ahujasid/blender-mcp',
+  'https://github.com/ahujasid/blender-mcp',
+  null,
+  'https://github.com/ahujasid/blender-mcp',
+  'https://github.com/ahujasid/blender-mcp',
+  'open_source', 'MIT License',
+  true, true, false, true, true, false,
+  4.6, 720, 44000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'Google MCP Toolbox for Databases',
+  'google-db-toolbox-mcp',
+  'Open-source MCP server from Google for connecting agents to enterprise databases.',
+  'MCP Toolbox for Databases (googleapis) is a production MCP server with prebuilt tools for Postgres, MySQL, BigQuery, AlloyDB, and other databases, including connection pooling and auth.',
+  'https://mcp-toolbox.dev',
+  'https://github.com/googleapis/mcp-toolbox',
+  null,
+  'https://mcp-toolbox.dev',
+  'https://github.com/googleapis/mcp-toolbox',
+  'open_source', 'Apache 2.0',
+  true, true, true, true, true, false,
+  4.5, 340, 22000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'AWS MCP',
+  'aws-mcp',
+  'Official suite of AWS MCP servers for docs, CDK, Lambda, cost, and more.',
+  'AWS MCP Servers (awslabs) is an open-source collection of specialized MCP servers that help agents search AWS documentation, generate CDK, invoke Lambda, and analyze cost.',
+  'https://awslabs.github.io/mcp',
+  'https://github.com/awslabs/mcp',
+  null,
+  'https://awslabs.github.io/mcp',
+  'https://github.com/awslabs/mcp',
+  'open_source', 'Apache 2.0',
+  true, true, true, true, true, false,
+  4.5, 610, 39000, 'published', 'seed', now(),
+  'mcp', now()
+),
+(
+  'Grok',
+  'grok',
+  'xAI assistant for reasoning, coding, research, and real-time X/web context.',
+  'Grok is xAI’s agentic assistant. It works in chat, Grok.com, and the xAI API, can use tools and remote MCP servers, and is strong at coding and current-events research.',
+  'https://grok.x.ai',
+  null,
+  'https://grok.x.ai',
+  'https://docs.x.ai',
+  null,
+  'freemium', 'Free + SuperGrok / API',
+  false, false, true, false, true, false,
+  4.6, 2100, 180000, 'published', 'seed', now(),
+  'agent', now()
+),
+(
+  'xAI Docs MCP',
+  'xai-docs-mcp',
+  'Official MCP server for xAI documentation.',
+  'Hosted MCP endpoint that lets agents query xAI docs instead of pasting pages into context.',
+  'https://docs.x.ai/developers/docs-mcp',
+  null,
+  null,
+  'https://docs.x.ai/developers/docs-mcp',
+  'https://docs.x.ai/api/mcp',
+  'free', 'Free',
+  false, false, false, true, true, false,
+  4.5, 120, 9000, 'published', 'seed', now(),
+  'mcp', now()
+)
+on conflict (slug) do nothing;
+
 -- Link categories
 insert into agent_categories (agent_id, category_id)
 select a.id, c.id from agents a, categories c
@@ -697,6 +859,17 @@ where (a.slug = 'cursor' and c.slug = 'coding')
    or (a.slug = 'continue' and c.slug = 'coding')
    or (a.slug = 'haystack' and c.slug = 'data')
    or (a.slug = 'roo-code' and c.slug = 'coding')
+   or (a.slug = 'grafana-mcp' and c.slug = 'observability')
+   or (a.slug = 'chrome-devtools-mcp' and c.slug = 'coding')
+   or (a.slug = 'mongodb-mcp' and c.slug = 'data')
+   or (a.slug = 'neon-mcp' and c.slug = 'data')
+   or (a.slug = 'apify-mcp' and c.slug = 'data')
+   or (a.slug = 'blender-mcp' and c.slug = 'content')
+   or (a.slug = 'google-db-toolbox-mcp' and c.slug = 'data')
+   or (a.slug = 'aws-mcp' and c.slug = 'data')
+   or (a.slug = 'grok' and c.slug = 'research')
+   or (a.slug = 'grok' and c.slug = 'coding')
+   or (a.slug = 'xai-docs-mcp' and c.slug = 'coding')
 on conflict do nothing;
 
 -- Link tags

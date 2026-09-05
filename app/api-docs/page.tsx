@@ -15,6 +15,11 @@ const HOST = "https://www.omnisiv.com";
 const SEARCH_PARAMS = [
   { name: "q", type: "string", description: "Full-text search query" },
   { name: "has_mcp", type: "boolean", description: "Agents with an MCP server" },
+  {
+    name: "kind",
+    type: "string",
+    description: "Listing kind — agent · mcp · skill. kind=mcp also matches has_mcp.",
+  },
   { name: "has_api", type: "boolean", description: "Agents with a public API" },
   { name: "open_source", type: "boolean", description: "Open-source license (is_open_source)" },
   {
@@ -25,7 +30,8 @@ const SEARCH_PARAMS = [
   {
     name: "category",
     type: "string",
-    description: "Category slug — coding, research, data, multi-agent",
+    description:
+      "Category slug — coding, research, data, multi-agent, observability, payments",
   },
   {
     name: "sort",
@@ -37,7 +43,7 @@ const SEARCH_PARAMS = [
 
 const SEARCH_EXAMPLES = [
   { path: "/api/search?q=mcp&limit=5" },
-  { path: "/api/search?has_mcp=true&sort=score" },
+  { path: "/api/search?kind=mcp&sort=score" },
   { path: "/api/search?q=web+scraping&has_mcp=true&free=true" },
 ] as const;
 
@@ -75,6 +81,7 @@ const SEARCH_SAMPLE = `{
       "is_self_hostable": true,
       "has_api": true,
       "has_mcp": true,
+      "kind": "mcp",
       "agent_ready_score": 100,
       "rating": 4.4,
       "review_count": 420,

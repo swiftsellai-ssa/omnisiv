@@ -100,6 +100,7 @@ export async function POST(request: NextRequest) {
     last_verified_at: now,
     is_open_source: openSource,
     has_mcp: hasMcp,
+    kind: hasMcp ? "mcp" : "agent",
     pricing_type: openSource ? "open_source" : "free",
   });
 

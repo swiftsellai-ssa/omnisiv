@@ -1,4 +1,9 @@
-import type { PricingType, SearchFilters } from "@/types";
+import {
+  AGENT_KINDS,
+  type AgentKind,
+  type PricingType,
+  type SearchFilters,
+} from "@/types";
 
 export const FREE_PRICING_TYPES: PricingType[] = ["free", "open_source"];
 
@@ -51,7 +56,9 @@ export function parseSearchFilters(
         ? (pricing as PricingType)
         : "all",
     open_source: isTruthyParam(get("open_source")) || undefined,
-    has_mcp: isTruthyParam(get("has_mcp")) || undefined,
+    kind: parseKind(get("kind")),
+    has_mcp:
+      isTruthyParam(get("has_mcp")) || get("kind") === "mcp" || undefined,
     has_api: isTruthyParam(get("has_api")) || undefined,
     self_hostable: isTruthyParam(get("self_hostable")) || undefined,
     free: isTruthyParam(get("free")) || undefined,
@@ -63,6 +70,13 @@ export function parseSearchFilters(
   };
 }
 
+export function parseKind(value: string | null | undefined): AgentKind | undefined {
+  if (value && (AGENT_KINDS as string[]).includes(value)) {
+    return value as AgentKind;
+  }
+  return undefined;
+}
+
 export function hasActiveFilters(filters: SearchFilters): boolean {
   return Boolean(
     filters.has_mcp ||
@@ -70,6 +84,7 @@ export function hasActiveFilters(filters: SearchFilters): boolean {
       filters.open_source ||
       filters.self_hostable ||
       filters.free ||
+      filters.kind ||
       filters.category ||
       (filters.pricing && filters.pricing !== "all")
   );

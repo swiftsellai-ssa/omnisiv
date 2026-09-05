@@ -25,6 +25,7 @@ export function compactSearchFilters(
 
   const out: Record<string, unknown> = {};
   if (filters.has_mcp) out.has_mcp = true;
+  if (filters.kind) out.kind = filters.kind;
   if (filters.has_api) out.has_api = true;
   if (filters.open_source) out.open_source = true;
   if (filters.self_hostable) out.self_hostable = true;

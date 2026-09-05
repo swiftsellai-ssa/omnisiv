@@ -3,7 +3,7 @@ import { z } from "zod";
 
 import { searchAgents } from "@/lib/search";
 import { logSearch } from "@/lib/search-log";
-import type { Agent, AgentPublic, SearchFilters } from "@/types";
+import { listingKind, type Agent, type AgentPublic, type SearchFilters } from "@/types";
 
 const BASE_URL = "https://www.omnisiv.com";
 const DEFAULT_LIMIT = 20;
@@ -12,6 +12,7 @@ const MAX_LIMIT = 50;
 const searchSchema = z.object({
   q: z.string().optional(),
   has_mcp: z.coerce.boolean().optional(),
+  kind: z.enum(["agent", "mcp", "skill"]).optional(),
   has_api: z.coerce.boolean().optional(),
   open_source: z.coerce.boolean().optional(),
   free: z.coerce.boolean().optional(),
@@ -42,6 +43,7 @@ function toPublic(agent: Agent): AgentPublic {
     is_self_hostable: agent.is_self_hostable,
     has_api: agent.has_api,
     has_mcp: agent.has_mcp,
+    kind: listingKind(agent.kind, agent.has_mcp),
     agent_ready_score: agent.agent_ready_score,
     rating: agent.rating,
     review_count: agent.review_count,
@@ -65,12 +67,13 @@ export async function GET(request: NextRequest) {
     );
   }
 
-  const { q, has_mcp, has_api, open_source, free, category, sort, limit } =
+  const { q, has_mcp, kind, has_api, open_source, free, category, sort, limit } =
     parsed.data;
 
   const filters: SearchFilters = {
     q,
-    has_mcp: has_mcp || undefined,
+    kind,
+    has_mcp: has_mcp || kind === "mcp" || undefined,
     has_api: has_api || undefined,
     open_source: open_source || undefined,
     free: free || undefined,
